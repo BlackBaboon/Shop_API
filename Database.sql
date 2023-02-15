@@ -75,6 +75,7 @@ create table Ships
 ID int,
 UserId int,
 GoodId int,
+Amount int,
 ShipDate datetime not null,
 [Status] nvarchar(100) null,
 primary key(ID,UserId,GoodId),
