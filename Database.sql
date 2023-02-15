@@ -76,7 +76,8 @@ ID int,
 UserId int,
 GoodId int,
 ShipDate datetime not null,
-Success bit null,
+[Status] nvarchar(100) null,
 primary key(ID,UserId,GoodId),
-Foreign key (UserId,GoodId) references GoodsList(UserId,GoodId)
+FOREIGN KEY (UserId) references Users(ID),
+FOREIGN KEY (GoodId) references Goods(ID)
 );
