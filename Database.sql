@@ -1,10 +1,10 @@
 use master 
 go
-drop database ЛарионовДота
+drop database Г‹Г Г°ГЁГ®Г­Г®ГўГ„Г®ГІГ 
 go
-create database ЛарионовДота
+create database Г‹Г Г°ГЁГ®Г­Г®ГўГ„Г®ГІГ 
 go
-use ЛарионовДота
+use Г‹Г Г°ГЁГ®Г­Г®ГўГ„Г®ГІГ 
 
 create table Users
 (
@@ -37,7 +37,8 @@ create table Goods
 ID int primary key,
 Title nvarchar(100) not null,
 Price decimal(20,2) not null,
-Descryption nvarchar(MAX) not null,
+Amount int not null,
+Descryption nvarchar(MAX) not null
 );
 
 create table GoodsList
