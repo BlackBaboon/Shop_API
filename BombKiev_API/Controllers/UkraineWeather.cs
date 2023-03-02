@@ -14,7 +14,7 @@ namespace BombKiev_API.Controllers
         "Герань-2","Калибр","Базальт","Малахит","Царь-Бомба"
         };
 
-        private readonly ILogger<UkraineWeather>? _logger;
+        private readonly ILogger<UkraineWeather> _logger;
 
         public UkraineWeather(ILogger<UkraineWeather> logger)
         {

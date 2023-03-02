@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
 namespace BombKiev_API
 {
     public class Program
@@ -8,12 +5,6 @@ namespace BombKiev_API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-
-            builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connection));
-
-            builder.Services.AddControllersWithViews();
 
             // Add services to the container.
 
@@ -23,8 +14,6 @@ namespace BombKiev_API
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
-            app.MapDefaultControllerRoute();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
