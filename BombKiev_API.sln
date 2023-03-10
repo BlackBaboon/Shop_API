@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BombKiev_API", "BombKiev_API\BombKiev_API.csproj", "{FA5D7305-C063-4E46-BCCE-09EB90B21B0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{5A3CF0E2-FC2A-4C07-8BD0-D09055C8BCA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{5A3CF0E2-FC2A-4C07-8BD0-D09055C8BCA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{91B8C0F1-D1AF-46C2-9B40-4800C87A19BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{91B8C0F1-D1AF-46C2-9B40-4800C87A19BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1B056B16-16F3-4F0F-A20D-A6805A28C191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{91B8C0F1-D1AF-46C2-9B40-4800C87A19BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91B8C0F1-D1AF-46C2-9B40-4800C87A19BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91B8C0F1-D1AF-46C2-9B40-4800C87A19BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

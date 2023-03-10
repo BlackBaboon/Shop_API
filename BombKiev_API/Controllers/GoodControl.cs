@@ -2,55 +2,50 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using DataAccess;
+using DataAccess.Model;
+using Domain.Model;
 using BusinessLogic;
-
+using BusinessLogic.Interfaces;
 
 namespace BombKiev_API.Controllers
 {
     public class GoodControl : Controller
     {
-        private readonly ILogger<GoodControl>? _logger;
-        GoodsDB db = new GoodsDB();
-
-        public GoodControl(ILogger<GoodControl> logger)
+        private IGoodService _goodInterface;
+        public GoodControl(IGoodService goodInterface)
         {
-            _logger = logger;
+            _goodInterface = goodInterface;
+        }
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _goodInterface.GetAll());
         }
 
-        [HttpGet("EnableGoods")]
-        public IActionResult EnableGood()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok(db.Enable());
+            return Ok(await _goodInterface.GetById(id));
+        }
+        [HttpPost("add")]
+        public async Task<IActionResult> Add(Good good)
+        {
+            await _goodInterface.Create(good);
+            return Ok();
         }
 
-        [HttpGet("SearchByTitle")]
-        public IActionResult EnableGood([Required] string Title)
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(Good good)
         {
-            return Ok(db.Enable(Title));
+            await _goodInterface.Update(good);
+            return Ok();
+        }
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _goodInterface.Delete(id);
+            return Ok();
         }
 
-        [HttpPost("AddGood")]
-        public IActionResult GoodAdd([Required] int Id, [Required] string Title, [Required] decimal Price,
-            [Required] int StartAmount, string Desc="")
-        {
-            try
-            {
-                db.Add(Id, Title, Price, StartAmount, Desc);
-                return Ok();
-            }
-            catch (Exception ex) { return BadRequest("Ошибка при добавлении"); }
-        }
-
-        [HttpPut("EditGood")]
-        public IActionResult GoodChange([Required] int Id, string Title="", decimal Price=0,
-            int AmountChange=0, string Desc="")
-        {
-            try
-            {
-                db.Change(Id, Title, Price, AmountChange, Desc);
-                return Ok();
-            }
-            catch { return BadRequest("Ошибка при изменении"); }
-        }
     }
 }

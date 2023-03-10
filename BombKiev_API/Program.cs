@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using DataAccess;
+using DataAccess.Model;
+using DataAccess.Wrapper;
+using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 
 namespace BombKiev_API
 {
@@ -9,9 +12,11 @@ namespace BombKiev_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(
+                "Data Source=Daun;Initial Catalog=ЛарионовДота;Integrated Security=True;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true"));
 
-            builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connection));
+            builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            builder.Services.AddScoped<IGoodService, GoodService>();
 
             builder.Services.AddControllersWithViews();
 

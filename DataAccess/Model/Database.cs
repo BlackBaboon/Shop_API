@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,8 +26,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Model;
 
-namespace DataAccess
+namespace DataAccess.Model
 {
     #region Database context interface
 
@@ -118,13 +118,13 @@ namespace DataAccess
         public DbSet<Ship> Ships { get; set; } // Ships
         public DbSet<User> Users { get; set; } // Users
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Data Source=Daun;Initial Catalog=ЛарионовДота;Integrated Security=True;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer(@"Data Source=Daun;Initial Catalog=ЛарионовДота;Integrated Security=True;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true");
+        //    }
+        //}
 
         public bool IsSqlParameterNull(SqlParameter param)
         {
@@ -152,919 +152,6 @@ namespace DataAccess
 
     #endregion
 
-    #region Database context factory
-
-    public class MyDbContextFactory : IDesignTimeDbContextFactory<MyDbContext>
-    {
-        public MyDbContext CreateDbContext(string[] args)
-        {
-            return new MyDbContext();
-        }
-    }
-
-    #endregion
-
-    #region Fake Database context
-
-    // ****************************************************************************************************
-    // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
-    // ****************************************************************************************************
-
-    public class FakeMyDbContext : IMyDbContext
-    {
-        public DbSet<Comment> Comments { get; set; } // Comments
-        public DbSet<Good> Goods { get; set; } // Goods
-        public DbSet<GoodsList> GoodsLists { get; set; } // GoodsList
-        public DbSet<LikedList> LikedLists { get; set; } // LikedList
-        public DbSet<SavedAdress> SavedAdresses { get; set; } // SavedAdresses
-        public DbSet<Ship> Ships { get; set; } // Ships
-        public DbSet<User> Users { get; set; } // Users
-
-        public FakeMyDbContext()
-        {
-            _database = new FakeDatabaseFacade(new MyDbContext());
-
-            Comments = new FakeDbSet<Comment>("UserId", "GoodId");
-            Goods = new FakeDbSet<Good>("Id");
-            GoodsLists = new FakeDbSet<GoodsList>("UserId", "GoodId");
-            LikedLists = new FakeDbSet<LikedList>("UserId", "GoodId");
-            SavedAdresses = new FakeDbSet<SavedAdress>("UserId", "Title");
-            Ships = new FakeDbSet<Ship>("Id", "UserId", "GoodId");
-            Users = new FakeDbSet<User>("Id");
-
-        }
-
-        public int SaveChangesCount { get; private set; }
-        public virtual int SaveChanges()
-        {
-            ++SaveChangesCount;
-            return 1;
-        }
-
-        public virtual int SaveChanges(bool acceptAllChangesOnSuccess)
-        {
-            return SaveChanges();
-        }
-
-        public virtual Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            ++SaveChangesCount;
-            return Task<int>.Factory.StartNew(() => 1, cancellationToken);
-        }
-        public virtual Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)
-        {
-            ++SaveChangesCount;
-            return Task<int>.Factory.StartNew(x => 1, acceptAllChangesOnSuccess, cancellationToken);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private DatabaseFacade _database;
-        public DatabaseFacade Database { get { return _database; } }
-
-        public DbSet<TEntity> Set<TEntity>() where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry Add(object entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task AddRangeAsync(params object[] entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual async Task AddRangeAsync(IEnumerable<object> entities, CancellationToken cancellationToken = default)
-        {
-            await Task.CompletedTask;
-            throw new NotImplementedException();
-        }
-
-        public virtual async ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : class
-        {
-            await Task.CompletedTask;
-            throw new NotImplementedException();
-        }
-
-        public virtual async ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default)
-        {
-            await Task.CompletedTask;
-            throw new NotImplementedException();
-        }
-
-        public virtual void AddRange(IEnumerable<object> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void AddRange(params object[] entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry Attach(object entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry<TEntity> Attach<TEntity>(TEntity entity) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void AttachRange(IEnumerable<object> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void AttachRange(params object[] entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry Entry(object entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual TEntity Find<TEntity>(params object[] keyValues) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual ValueTask<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual ValueTask<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual ValueTask<object> FindAsync(Type entityType, params object[] keyValues)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual object Find(Type entityType, params object[] keyValues)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry Remove(object entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void RemoveRange(IEnumerable<object> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void RemoveRange(params object[] entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry Update(object entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void UpdateRange(IEnumerable<object> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void UpdateRange(params object[] entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IQueryable<TResult> FromExpression<TResult> (Expression<Func<IQueryable<TResult>>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-    }
-
-    #endregion
-
-    #region Fake DbSet
-
-    // ************************************************************************
-    // Fake DbSet
-    // Implementing Find:
-    //      The Find method is difficult to implement in a generic fashion. If
-    //      you need to test code that makes use of the Find method it is
-    //      easiest to create a test DbSet for each of the entity types that
-    //      need to support find. You can then write logic to find that
-    //      particular type of entity, as shown below:
-    //      public class FakeBlogDbSet : FakeDbSet<Blog>
-    //      {
-    //          public override Blog Find(params object[] keyValues)
-    //          {
-    //              var id = (int) keyValues.Single();
-    //              return this.SingleOrDefault(b => b.BlogId == id);
-    //          }
-    //      }
-    //      Read more about it here: https://msdn.microsoft.com/en-us/data/dn314431.aspx
-    public class FakeDbSet<TEntity> :
-        DbSet<TEntity>,
-        IQueryable<TEntity>,
-        IAsyncEnumerable<TEntity>,
-        IListSource,
-        IResettableService
-        where TEntity : class
-    {
-        private readonly PropertyInfo[] _primaryKeys;
-        private ObservableCollection<TEntity> _data;
-        private IQueryable _query;
-        public override IEntityType EntityType { get; }
-
-        public FakeDbSet()
-        {
-            _primaryKeys = null;
-            _data        = new ObservableCollection<TEntity>();
-            _query       = _data.AsQueryable();
-        }
-
-        public FakeDbSet(params string[] primaryKeys)
-        {
-            _primaryKeys = typeof(TEntity).GetProperties().Where(x => primaryKeys.Contains(x.Name)).ToArray();
-            _data        = new ObservableCollection<TEntity>();
-            _query       = _data.AsQueryable();
-        }
-
-        public override TEntity Find(params object[] keyValues)
-        {
-            if (_primaryKeys == null)
-                throw new ArgumentException("No primary keys defined");
-            if (keyValues.Length != _primaryKeys.Length)
-                throw new ArgumentException("Incorrect number of keys passed to Find method");
-
-            var keyQuery = this.AsQueryable();
-            keyQuery = keyValues
-                .Select((t, i) => i)
-                .Aggregate(keyQuery,
-                    (current, x) =>
-                        current.Where(entity => _primaryKeys[x].GetValue(entity, null).Equals(keyValues[x])));
-
-            return keyQuery.SingleOrDefault();
-        }
-
-        public override ValueTask<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken)
-        {
-            return new ValueTask<TEntity>(Task<TEntity>.Factory.StartNew(() => Find(keyValues), cancellationToken));
-        }
-
-        public override ValueTask<TEntity> FindAsync(params object[] keyValues)
-        {
-            return new ValueTask<TEntity>(Task<TEntity>.Factory.StartNew(() => Find(keyValues)));
-        }
-
-        public override EntityEntry<TEntity> Add(TEntity entity)
-        {
-            _data.Add(entity);
-            return null;
-        }
-
-        public override ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
-        {
-            return new ValueTask<EntityEntry<TEntity>>(Task<EntityEntry<TEntity>>.Factory.StartNew(() => Add(entity), cancellationToken));
-        }
-
-        public override void AddRange(params TEntity[] entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            foreach (var entity in entities)
-                _data.Add(entity);
-        }
-
-        public override void AddRange(IEnumerable<TEntity> entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            foreach (var entity in entities)
-                _data.Add(entity);
-        }
-
-        public override Task AddRangeAsync(params TEntity[] entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            return Task.Factory.StartNew(() => AddRange(entities));
-        }
-
-        public override Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            return Task.Factory.StartNew(() => AddRange(entities), cancellationToken);
-        }
-
-        public override EntityEntry<TEntity> Attach(TEntity entity)
-        {
-            if (entity == null) throw new ArgumentNullException("entity");
-            return Add(entity);
-        }
-
-        public override void AttachRange(params TEntity[] entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            AddRange(entities);
-        }
-
-        public override void AttachRange(IEnumerable<TEntity> entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            AddRange(entities);
-        }
-
-        public override EntityEntry<TEntity> Remove(TEntity entity)
-        {
-            _data.Remove(entity);
-            return null;
-        }
-
-        public override void RemoveRange(params TEntity[] entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            foreach (var entity in entities.ToList())
-                _data.Remove(entity);
-        }
-
-        public override void RemoveRange(IEnumerable<TEntity> entities)
-        {
-            RemoveRange(entities.ToArray());
-        }
-
-        public override EntityEntry<TEntity> Update(TEntity entity)
-        {
-            _data.Remove(entity);
-            _data.Add(entity);
-            return null;
-        }
-
-        public override void UpdateRange(params TEntity[] entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            RemoveRange(entities);
-            AddRange(entities);
-        }
-
-        public override void UpdateRange(IEnumerable<TEntity> entities)
-        {
-            if (entities == null) throw new ArgumentNullException("entities");
-            var array = entities.ToArray();        RemoveRange(array);
-            AddRange(array);
-        }
-
-        bool IListSource.ContainsListCollection => true;
-
-        public IList GetList()
-        {
-            return _data;
-        }
-
-        IList IListSource.GetList()
-        {
-            return _data;
-        }
-
-        Type IQueryable.ElementType
-        {
-            get { return _query.ElementType; }
-        }
-
-        Expression IQueryable.Expression
-        {
-            get { return _query.Expression; }
-        }
-
-        IQueryProvider IQueryable.Provider
-        {
-            get { return new FakeDbAsyncQueryProvider<TEntity>(_data); }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _data.GetEnumerator();
-        }
-
-        IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator()
-        {
-            return _data.GetEnumerator();
-        }
-
-        public override IAsyncEnumerator<TEntity> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-        {
-            return new FakeDbAsyncEnumerator<TEntity>(this.AsEnumerable().GetEnumerator());
-        }
-
-        public void ResetState()
-        {
-            _data  = new ObservableCollection<TEntity>();
-            _query = _data.AsQueryable();
-        }
-
-        public Task ResetStateAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.Factory.StartNew(() => ResetState());
-        }
-    }
-
-    public class FakeDbAsyncQueryProvider<TEntity> : FakeQueryProvider<TEntity>, IAsyncEnumerable<TEntity>, IAsyncQueryProvider
-    {
-        public FakeDbAsyncQueryProvider(Expression expression) : base(expression)
-        {
-        }
-
-        public FakeDbAsyncQueryProvider(IEnumerable<TEntity> enumerable) : base(enumerable)
-        {
-        }
-
-        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
-        {
-            var expectedResultType = typeof(TResult).GetGenericArguments()[0];
-            var executionResult = typeof(IQueryProvider)
-                .GetMethods()
-                .First(method => method.Name == nameof(IQueryProvider.Execute) && method.IsGenericMethod)
-                .MakeGenericMethod(expectedResultType)
-                .Invoke(this, new object[] { expression });
-
-            return (TResult) typeof(Task).GetMethod(nameof(Task.FromResult))
-                ?.MakeGenericMethod(expectedResultType)
-                .Invoke(null, new[] { executionResult });
-        }
-
-        public IAsyncEnumerator<TEntity> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-        {
-            return new FakeDbAsyncEnumerator<TEntity>(this.AsEnumerable().GetEnumerator());
-        }
-    }
-
-    public class FakeDbAsyncEnumerable<T> : EnumerableQuery<T>, IAsyncEnumerable<T>, IQueryable<T>
-    {
-        public FakeDbAsyncEnumerable(IEnumerable<T> enumerable)
-            : base(enumerable)
-        {
-        }
-
-        public FakeDbAsyncEnumerable(Expression expression)
-            : base(expression)
-        {
-        }
-
-        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return new FakeDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
-        }
-
-        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAsyncEnumerator(cancellationToken);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.AsEnumerable().GetEnumerator();
-        }
-    }
-
-    public class FakeDbAsyncEnumerator<T> : IAsyncEnumerator<T>
-    {
-        private readonly IEnumerator<T> _inner;
-
-        public FakeDbAsyncEnumerator(IEnumerator<T> inner)
-        {
-            _inner = inner;
-        }
-
-        public T Current
-        {
-            get { return _inner.Current; }
-        }
-
-        public ValueTask<bool> MoveNextAsync()
-        {
-            return new ValueTask<bool>(_inner.MoveNext());
-        }
-
-        public ValueTask DisposeAsync()
-        {
-            _inner.Dispose();
-            return new ValueTask(Task.CompletedTask);
-        }
-    }
-
-    public abstract class FakeQueryProvider<T> : IOrderedQueryable<T>, IQueryProvider
-    {
-        private IEnumerable<T> _enumerable;
-
-        protected FakeQueryProvider(Expression expression)
-        {
-            Expression = expression;
-        }
-
-        protected FakeQueryProvider(IEnumerable<T> enumerable)
-        {
-            _enumerable = enumerable;
-            Expression = enumerable.AsQueryable().Expression;
-        }
-
-        public IQueryable CreateQuery(Expression expression)
-        {
-            if (expression is MethodCallExpression m)
-            {
-                var resultType = m.Method.ReturnType; // it should be IQueryable<T>
-                var tElement = resultType.GetGenericArguments().First();
-                return (IQueryable) CreateInstance(tElement, expression);
-            }
-
-            return CreateQuery<T>(expression);
-        }
-
-        public IQueryable<TEntity> CreateQuery<TEntity>(Expression expression)
-        {
-            return (IQueryable<TEntity>) CreateInstance(typeof(TEntity), expression);
-        }
-
-        private object CreateInstance(Type tElement, Expression expression)
-        {
-            var queryType = GetType().GetGenericTypeDefinition().MakeGenericType(tElement);
-            return Activator.CreateInstance(queryType, expression);
-        }
-
-        public object Execute(Expression expression)
-        {
-            return CompileExpressionItem<object>(expression);
-        }
-
-        public TResult Execute<TResult>(Expression expression)
-        {
-            return CompileExpressionItem<TResult>(expression);
-        }
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            if (_enumerable == null) _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
-            return _enumerable.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            if (_enumerable == null) _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
-            return _enumerable.GetEnumerator();
-        }
-
-        public Type ElementType => typeof(T);
-
-        public Expression Expression { get; }
-
-        public IQueryProvider Provider => this;
-
-        private static TResult CompileExpressionItem<TResult>(Expression expression)
-        {
-            var visitor = new FakeExpressionVisitor();
-            var body = visitor.Visit(expression);
-            var f = Expression.Lambda<Func<TResult>>(body ?? throw new InvalidOperationException(string.Format("{0} is null", nameof(body))), (IEnumerable<ParameterExpression>) null);
-            return f.Compile()();
-        }
-    }
-
-    public class FakeExpressionVisitor : ExpressionVisitor
-    {
-    }
-
-    public class FakeDatabaseFacade : DatabaseFacade
-    {
-        public FakeDatabaseFacade(DbContext context) : base(context)
-        {
-        }
-
-        public override bool EnsureCreated()
-        {
-            return true;
-        }
-
-        public override Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.FromResult(EnsureCreated());
-        }
-
-        public override bool EnsureDeleted()
-        {
-            return true;
-        }
-
-        public override Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.FromResult(EnsureDeleted());
-        }
-
-        public override bool CanConnect()
-        {
-            return true;
-        }
-
-        public override Task<bool> CanConnectAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.FromResult(CanConnect());
-        }
-
-        public override IDbContextTransaction BeginTransaction()
-        {
-            return new FakeDbContextTransaction();
-        }
-
-        public override Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.FromResult(BeginTransaction());
-        }
-
-        public override void CommitTransaction()
-        {
-        }
-
-        public override Task CommitTransactionAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.CompletedTask;
-        }
-
-        public override void RollbackTransaction()
-        {
-        }
-
-        public override Task RollbackTransactionAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.CompletedTask;
-        }
-
-        public override IExecutionStrategy CreateExecutionStrategy()
-        {
-            return null;
-        }
-
-        public override string ToString()
-        {
-            return string.Empty;
-        }
-    }
-
-    public class FakeDbContextTransaction : IDbContextTransaction
-    {
-        public Guid TransactionId => Guid.NewGuid();
-        public void Commit() { }
-        public void Rollback() { }
-        public Task CommitAsync(CancellationToken cancellationToken = new CancellationToken()) => Task.CompletedTask;
-        public Task RollbackAsync(CancellationToken cancellationToken = new CancellationToken()) => Task.CompletedTask;
-        public void Dispose() { }
-        public ValueTask DisposeAsync() => default;
-    }
-
-    #endregion
-
-    #region POCO classes
-
-    // ****************************************************************************************************
-    // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
-    // ****************************************************************************************************
-
-    // Comments
-    public class Comment
-    {
-        public int UserId { get; set; } // UserId (Primary key)
-        public int GoodId { get; set; } // GoodId (Primary key)
-        public int Rate { get; set; } // Rate
-        public int? Comment_ { get; set; } // Comment
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Good pointed by [Comments].([GoodId]) (FK__Comments__GoodId__46E78A0C)
-        /// </summary>
-        public Good Good { get; set; } // FK__Comments__GoodId__46E78A0C
-
-        /// <summary>
-        /// Parent User pointed by [Comments].([UserId]) (FK__Comments__UserId__45F365D3)
-        /// </summary>
-        public User User { get; set; } // FK__Comments__UserId__45F365D3
-    }
-
-    // Goods
-    public class Good
-    {
-        public int Id { get; set; } // ID (Primary key)
-        public string Title { get; set; } // Title (length: 100)
-        public decimal Price { get; set; } // Price
-        public int Amount { get; set; } // Amount
-        public string Descryption { get; set; } // Descryption
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child Comments where [Comments].[GoodId] point to this entity (FK__Comments__GoodId__46E78A0C)
-        /// </summary>
-        public ICollection<Comment> Comments { get; set; } // Comments.FK__Comments__GoodId__46E78A0C
-
-        /// <summary>
-        /// Child GoodsLists where [GoodsList].[GoodId] point to this entity (FK__GoodsList__GoodI__3F466844)
-        /// </summary>
-        public ICollection<GoodsList> GoodsLists { get; set; } // GoodsList.FK__GoodsList__GoodI__3F466844
-
-        /// <summary>
-        /// Child LikedLists where [LikedList].[GoodId] point to this entity (FK__LikedList__GoodI__4316F928)
-        /// </summary>
-        public ICollection<LikedList> LikedLists { get; set; } // LikedList.FK__LikedList__GoodI__4316F928
-
-        /// <summary>
-        /// Child Ships where [Ships].[GoodId] point to this entity (FK__Ships__GoodId__4AB81AF0)
-        /// </summary>
-        public ICollection<Ship> Ships { get; set; } // Ships.FK__Ships__GoodId__4AB81AF0
-
-        public Good()
-        {
-            Comments = new List<Comment>();
-            GoodsLists = new List<GoodsList>();
-            LikedLists = new List<LikedList>();
-            Ships = new List<Ship>();
-        }
-    }
-
-    // GoodsList
-    public class GoodsList
-    {
-        public int UserId { get; set; } // UserId (Primary key)
-        public int GoodId { get; set; } // GoodId (Primary key)
-        public int Amount { get; set; } // Amount
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Good pointed by [GoodsList].([GoodId]) (FK__GoodsList__GoodI__3F466844)
-        /// </summary>
-        public Good Good { get; set; } // FK__GoodsList__GoodI__3F466844
-
-        /// <summary>
-        /// Parent User pointed by [GoodsList].([UserId]) (FK__GoodsList__UserI__3E52440B)
-        /// </summary>
-        public User User { get; set; } // FK__GoodsList__UserI__3E52440B
-    }
-
-    // LikedList
-    public class LikedList
-    {
-        public int UserId { get; set; } // UserId (Primary key)
-        public int GoodId { get; set; } // GoodId (Primary key)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Good pointed by [LikedList].([GoodId]) (FK__LikedList__GoodI__4316F928)
-        /// </summary>
-        public Good Good { get; set; } // FK__LikedList__GoodI__4316F928
-
-        /// <summary>
-        /// Parent User pointed by [LikedList].([UserId]) (FK__LikedList__UserI__4222D4EF)
-        /// </summary>
-        public User User { get; set; } // FK__LikedList__UserI__4222D4EF
-    }
-
-    // SavedAdresses
-    public class SavedAdress
-    {
-        public int UserId { get; set; } // UserId (Primary key)
-        public string Title { get; set; } // Title (Primary key) (length: 20)
-        public string City { get; set; } // City (length: 50)
-        public string Street { get; set; } // Street (length: 50)
-        public int House { get; set; } // House
-        public int? Building { get; set; } // Building
-        public int? Front { get; set; } // Front
-        public int? Apartament { get; set; } // Apartament
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent User pointed by [SavedAdresses].([UserId]) (FK__SavedAdre__UserI__398D8EEE)
-        /// </summary>
-        public User User { get; set; } // FK__SavedAdre__UserI__398D8EEE
-    }
-
-    // Ships
-    public class Ship
-    {
-        public int Id { get; set; } // ID (Primary key)
-        public int UserId { get; set; } // UserId (Primary key)
-        public int GoodId { get; set; } // GoodId (Primary key)
-        public int? Amount { get; set; } // Amount
-        public DateTime ShipDate { get; set; } // ShipDate
-        public string Status { get; set; } // Status (length: 100)
-
-        // Foreign keys
-
-        /// <summary>
-        /// Parent Good pointed by [Ships].([GoodId]) (FK__Ships__GoodId__4AB81AF0)
-        /// </summary>
-        public Good Good { get; set; } // FK__Ships__GoodId__4AB81AF0
-
-        /// <summary>
-        /// Parent User pointed by [Ships].([UserId]) (FK__Ships__UserId__49C3F6B7)
-        /// </summary>
-        public User User { get; set; } // FK__Ships__UserId__49C3F6B7
-    }
-
-    // Users
-    public class User
-    {
-        public int Id { get; set; } // ID (Primary key)
-        public string Nickname { get; set; } // Nickname (length: 20)
-        public string Surname { get; set; } // Surname (length: 20)
-        public string Name { get; set; } // Name (length: 20)
-        public string Email { get; set; } // Email (length: 50
-        public string Password { get; set; } // Email (length: 50)
-        public string Phonenumber { get; set; } // Phonenumber (length: 50)
-        public bool Authed { get; set; } // Authed
-        public bool IsAdmin { get; set; } // IsAdmin
-        public bool IsDelete { get; set; } // IsDelete
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child Comments where [Comments].[UserId] point to this entity (FK__Comments__UserId__45F365D3)
-        /// </summary>
-        public ICollection<Comment> Comments { get; set; } // Comments.FK__Comments__UserId__45F365D3
-
-        /// <summary>
-        /// Child GoodsLists where [GoodsList].[UserId] point to this entity (FK__GoodsList__UserI__3E52440B)
-        /// </summary>
-        public ICollection<GoodsList> GoodsLists { get; set; } // GoodsList.FK__GoodsList__UserI__3E52440B
-
-        /// <summary>
-        /// Child LikedLists where [LikedList].[UserId] point to this entity (FK__LikedList__UserI__4222D4EF)
-        /// </summary>
-        public ICollection<LikedList> LikedLists { get; set; } // LikedList.FK__LikedList__UserI__4222D4EF
-
-        /// <summary>
-        /// Child SavedAdresses where [SavedAdresses].[UserId] point to this entity (FK__SavedAdre__UserI__398D8EEE)
-        /// </summary>
-        public ICollection<SavedAdress> SavedAdresses { get; set; } // SavedAdresses.FK__SavedAdre__UserI__398D8EEE
-
-        /// <summary>
-        /// Child Ships where [Ships].[UserId] point to this entity (FK__Ships__UserId__49C3F6B7)
-        /// </summary>
-        public ICollection<Ship> Ships { get; set; } // Ships.FK__Ships__UserId__49C3F6B7
-
-        public User()
-        {
-            Comments = new List<Comment>();
-            GoodsLists = new List<GoodsList>();
-            LikedLists = new List<LikedList>();
-            SavedAdresses = new List<SavedAdress>();
-            Ships = new List<Ship>();
-        }
-    }
-
-
-    #endregion
 
     #region POCO Configuration
 
@@ -1078,7 +165,7 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.ToTable("Comments", "dbo");
-            builder.HasKey(x => new { x.UserId, x.GoodId }).HasName("PK__Comments__D7CB621F505EFBEB").IsClustered();
+            builder.HasKey(x => new { x.UserId, x.GoodId }).HasName("PK__Comments__D7CB621F4C519DAB").IsClustered();
 
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.GoodId).HasColumnName(@"GoodId").HasColumnType("int").IsRequired().ValueGeneratedNever();
@@ -1097,11 +184,11 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<Good> builder)
         {
             builder.ToTable("Goods", "dbo");
-            builder.HasKey(x => x.Id).HasName("PK__Goods__3214EC27059445A9").IsClustered();
+            builder.HasKey(x => x.Id).HasName("PK__Goods__3214EC2747D3C508").IsClustered();
 
             builder.Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.Title).HasColumnName(@"Title").HasColumnType("nvarchar(100)").IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal(20,2)").HasPrecision(20,2).IsRequired();
+            builder.Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal(20,2)").HasPrecision(20, 2).IsRequired();
             builder.Property(x => x.Amount).HasColumnName(@"Amount").HasColumnType("int").IsRequired();
             builder.Property(x => x.Descryption).HasColumnName(@"Descryption").HasColumnType("nvarchar(max)").IsRequired();
         }
@@ -1113,7 +200,7 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<GoodsList> builder)
         {
             builder.ToTable("GoodsList", "dbo");
-            builder.HasKey(x => new { x.UserId, x.GoodId }).HasName("PK__GoodsLis__D7CB621F1416AA5D").IsClustered();
+            builder.HasKey(x => new { x.UserId, x.GoodId }).HasName("PK__GoodsLis__D7CB621F7A6EF2A9").IsClustered();
 
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.GoodId).HasColumnName(@"GoodId").HasColumnType("int").IsRequired().ValueGeneratedNever();
@@ -1131,7 +218,7 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<LikedList> builder)
         {
             builder.ToTable("LikedList", "dbo");
-            builder.HasKey(x => new { x.UserId, x.GoodId }).HasName("PK__LikedLis__D7CB621F9B6564DD").IsClustered();
+            builder.HasKey(x => new { x.UserId, x.GoodId }).HasName("PK__LikedLis__D7CB621F263FEB94").IsClustered();
 
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.GoodId).HasColumnName(@"GoodId").HasColumnType("int").IsRequired().ValueGeneratedNever();
@@ -1148,7 +235,7 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<SavedAdress> builder)
         {
             builder.ToTable("SavedAdresses", "dbo");
-            builder.HasKey(x => new { x.UserId, x.Title }).HasName("PK__SavedAdr__D543AA01DF561F9C").IsClustered();
+            builder.HasKey(x => new { x.UserId, x.Title }).HasName("PK__SavedAdr__D543AA01C2B1B66D").IsClustered();
 
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.Title).HasColumnName(@"Title").HasColumnType("nvarchar(20)").IsRequired().HasMaxLength(20).ValueGeneratedNever();
@@ -1170,7 +257,7 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<Ship> builder)
         {
             builder.ToTable("Ships", "dbo");
-            builder.HasKey(x => new { x.Id, x.UserId, x.GoodId }).HasName("PK__Ships__DF685A0645FC1321").IsClustered();
+            builder.HasKey(x => new { x.Id, x.UserId, x.GoodId }).HasName("PK__Ships__DF685A06ADC55F86").IsClustered();
 
             builder.Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired().ValueGeneratedNever();
@@ -1191,14 +278,14 @@ namespace DataAccess
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users", "dbo");
-            builder.HasKey(x => x.Id).HasName("PK__Users__3214EC27E68D3C8B").IsClustered();
+            builder.HasKey(x => x.Id).HasName("PK__Users__3214EC27EF4AD3F1").IsClustered();
 
             builder.Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.Nickname).HasColumnName(@"Nickname").HasColumnType("nvarchar(20)").IsRequired().HasMaxLength(20);
             builder.Property(x => x.Surname).HasColumnName(@"Surname").HasColumnType("nvarchar(20)").IsRequired().HasMaxLength(20);
             builder.Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar(20)").IsRequired().HasMaxLength(20);
             builder.Property(x => x.Email).HasColumnName(@"Email").HasColumnType("nvarchar(50)").IsRequired(false).HasMaxLength(50);
-            builder.Property(x => x.Password).HasColumnName(@"Password").HasColumnType("nvarchar(50)").IsRequired(false).HasMaxLength(50);
+            builder.Property(x => x.Password).HasColumnName(@"Password").HasColumnType("nvarchar(50)").IsRequired().HasMaxLength(50);
             builder.Property(x => x.Phonenumber).HasColumnName(@"Phonenumber").HasColumnType("nvarchar(50)").IsRequired(false).HasMaxLength(50);
             builder.Property(x => x.Authed).HasColumnName(@"Authed").HasColumnType("bit").IsRequired();
             builder.Property(x => x.IsAdmin).HasColumnName(@"IsAdmin").HasColumnType("bit").IsRequired();
