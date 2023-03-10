@@ -46,7 +46,7 @@ namespace BusinessLogic
                 db.Goods.Update(NewGood);
                 db.SaveChanges();
             }
-            catch {  }
+            catch { }
         }
 
         public void Delete(int Id)
