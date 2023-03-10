@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using DataAccess;
+using BusinessLogic;
+
+
 
 namespace BombKiev_API.Controllers
 {
@@ -21,7 +25,7 @@ namespace BombKiev_API.Controllers
         }
 
         [HttpPost("AddCartGood")]
-        public IActionResult AddGood([Required] int UserId, [Required] int GoodId, int Amount=1)
+        public IActionResult Add([Required] int UserId, [Required] int GoodId, int Amount=1)
         {
             try
             {
@@ -63,7 +67,7 @@ namespace BombKiev_API.Controllers
         }
 
         [HttpDelete("DeleteCartGood")]
-        public IActionResult DeleteGood([Required] int UserId, [Required] int GoodId)
+        public IActionResult Delete([Required] int UserId, [Required] int GoodId)
         {
             try
             {

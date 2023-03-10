@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+using DataAccess;
 
 namespace BombKiev_API
 {
