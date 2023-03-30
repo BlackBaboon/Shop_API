@@ -1,15 +1,19 @@
-﻿using DataAccess.Interfaces;
+﻿using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Wrapper
+namespace Domain.Interfaces
 {
     public interface IRepositoryWrapper
     {
         IGoodsRepository Good { get; }
-        void Save();
+        IUserRepository User { get; }
+        IGoodsListRepository GoodsList { get; }
+        ICommentRepository Comment { get; }
+
+        Task Save();
     }
 }

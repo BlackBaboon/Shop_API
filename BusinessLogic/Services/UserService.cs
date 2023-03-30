@@ -1,49 +1,48 @@
 ﻿using Domain.Interfaces;
+using Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Domain.Model;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Services
 {
-    public class GoodService : IGoodService
+    public class UserService : IUserService
     {
 
         private IRepositoryWrapper _repositoryWrapper;
-        public GoodService(IRepositoryWrapper repositoryWrapper)
+        public UserService(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }
-        public async Task<List<Good>> GetAll()
+        public async Task<List<User>> GetAll()
         {
-            return await _repositoryWrapper.Good.FindAll();
+            return await _repositoryWrapper.User.FindAll();
         }
-        public async Task<Good> GetById(int id)
+        public async Task<User> GetById(int id)
         {
-            var good = _repositoryWrapper.Good
+            var good = _repositoryWrapper.User
             .FindByCondition(x => x.Id == id).Result.First();
 
             return good;
         }
-        public async Task Create(Good model)
+        public async Task Create(User model)
         {
-            await _repositoryWrapper.Good.Create(model);
+            await _repositoryWrapper.User.Create(model);
             await _repositoryWrapper.Save();
         }
-        public async Task Update(Good model)
+        public async Task Update(User model)
         {
-            await _repositoryWrapper.Good.Update(model);
+            await _repositoryWrapper.User.Update(model);
             await _repositoryWrapper.Save();
         }
         public async Task Delete(int id)
         {
-            var good = await _repositoryWrapper.Good
+            var user = await _repositoryWrapper.User
             .FindByCondition(x => x.Id == id);
 
-            await _repositoryWrapper.Good.Delete(good.First());
+            await _repositoryWrapper.User.Delete(user.First());
             await _repositoryWrapper.Save();
         }
     }

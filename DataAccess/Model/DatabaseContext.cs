@@ -27,6 +27,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Model;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Model
 {
@@ -109,6 +110,7 @@ namespace DataAccess.Model
             : base(options)
         {
         }
+
 
         public DbSet<Comment> Comments { get; set; } // Comments
         public DbSet<Good> Goods { get; set; } // Goods

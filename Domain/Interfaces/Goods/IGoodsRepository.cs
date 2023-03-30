@@ -1,4 +1,4 @@
-﻿using DataAccess.Repositories;
+﻿using Domain.Interfaces;
 using Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Interfaces
+namespace Domain.Interfaces
 {
     public interface IGoodsRepository: IRepositoryBase<Good>
     {

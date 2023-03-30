@@ -13,4 +13,9 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\LikedList\" />
+    <Folder Include="Interfaces\Ships\" />
+  </ItemGroup>
+
 </Project>

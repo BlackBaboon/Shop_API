@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Model;
 using DataAccess.Wrapper;
-using BusinessLogic.Interfaces;
+using Domain.Interfaces;
 using BusinessLogic.Services;
-
 namespace BombKiev_API
 {
     public class Program

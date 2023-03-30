@@ -5,7 +5,7 @@ using DataAccess;
 using DataAccess.Model;
 using Domain.Model;
 using BusinessLogic;
-using BusinessLogic.Interfaces;
+using Domain.Interfaces;
 
 namespace BombKiev_API.Controllers
 {
