@@ -9,13 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-
-    public class CommentRepository: RepositoryBase<Comment>, ICommentRepository
+    public class ShipsRepository : RepositoryBase<Ship>, IShipsRepository
     {
-        public CommentRepository(MyDbContext repositorycontext)
-                : base(repositorycontext)
+        public ShipsRepository(MyDbContext repositorycontext)
+            : base(repositorycontext)
         {
-
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Domain.Interfaces
         IUserRepository User { get; }
         IGoodsListRepository GoodsList { get; }
         ICommentRepository Comment { get; }
+        ILikedListRepository LikedList { get; }
+        IShipsRepository Ship { get; }
 
         Task Save();
     }

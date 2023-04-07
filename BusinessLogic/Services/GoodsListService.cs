@@ -52,12 +52,12 @@ namespace BusinessLogic.Services
             await _repositoryWrapper.GoodsList.Update(model);
             await _repositoryWrapper.Save();
         }
-        public async Task Delete(int id)
+        public async Task Delete(int userid, int goodid)
         {
-            var user = await _repositoryWrapper.User
-            .FindByCondition(x => x.Id == id);
+            var list = await _repositoryWrapper.GoodsList
+            .FindByCondition(x => x.UserId == userid&&x.GoodId==goodid );
 
-            await _repositoryWrapper.User.Delete(user.First());
+            await _repositoryWrapper.GoodsList.Delete(list.First());
             await _repositoryWrapper.Save();
         }
     }

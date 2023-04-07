@@ -61,6 +61,30 @@ namespace DataAccess.Wrapper
             }
         }
 
+        private ILikedListRepository _likedlist;
+
+        public ILikedListRepository LikedList
+        {
+            get
+            {
+                if (_likedlist == null)
+                    _likedlist = new LikedListRepository(_repoContext);
+                return _likedlist;
+            }
+        }
+
+        private IShipsRepository _ship;
+
+        public IShipsRepository Ship
+        {
+            get
+            {
+                if (_ship == null)
+                    _ship = new ShipsRepository(_repoContext);
+                return _ship;
+            }
+        }
+
         public RepositoryWrapper(MyDbContext repoContext)
         {
             _repoContext = repoContext;

@@ -15,6 +15,6 @@ namespace Domain.Interfaces
         Task<List<Comment>> GetByGoodid(int userid);
         Task Create(Comment model);
         Task Update(Comment model);
-        Task Delete(int id);
+        Task Delete(int userid,int goodid);
     }
 }
