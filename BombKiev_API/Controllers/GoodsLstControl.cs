@@ -13,7 +13,7 @@ namespace BombKiev_API.Controllers
         private IGoodsListService _goodsListInterface;
         public GoodsLstControl(IGoodsListService goodsListInterface)
         {
-            _goodsListInterface = goodsListInterface;  
+            _goodsListInterface = goodsListInterface;
         }
         /// <summary>
         /// Получение всех корзин
