@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    public class CommentsService : ICommentService
+    public class  CommentService : ICommentService
     {
         private IRepositoryWrapper _repositoryWrapper;
-        public CommentsService(IRepositoryWrapper repositoryWrapper)
+        public  CommentService(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }
