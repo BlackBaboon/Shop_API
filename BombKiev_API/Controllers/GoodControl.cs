@@ -50,9 +50,10 @@ namespace BombKiev_API.Controllers
         ///     POST
         ///     {
         ///         "id": 123543,
+        ///         "category": "лучшие видеокарты на рынке",
         ///         "title": "GTX 1050 TI MSI GAMING X",
         ///         "price": 24990, 
-        ///         "amount": 1, 
+        ///         "amount": 10, 
         ///         "descryption": "Лучшая видеокарта на рынке",
         ///     }
         /// 

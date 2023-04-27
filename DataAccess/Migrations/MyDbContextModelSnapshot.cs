@@ -56,6 +56,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
+                    b.Property<int>("Category")
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("ID");
+
                     b.Property<int>("Amount")
                         .HasColumnType("int")
                         .HasColumnName("Amount");

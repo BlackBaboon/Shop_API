@@ -189,6 +189,7 @@ namespace DataAccess.Model
             builder.HasKey(x => x.Id).HasName("PK__Goods__3214EC2747D3C508").IsClustered();
 
             builder.Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().ValueGeneratedNever();
+            builder.Property(x => x.Category).HasColumnName(@"Category").HasColumnType("nvarchar(100)").IsRequired().HasMaxLength(100);
             builder.Property(x => x.Title).HasColumnName(@"Title").HasColumnType("nvarchar(100)").IsRequired().HasMaxLength(100);
             builder.Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal(20,2)").HasPrecision(20, 2).IsRequired();
             builder.Property(x => x.Amount).HasColumnName(@"Amount").HasColumnType("int").IsRequired();

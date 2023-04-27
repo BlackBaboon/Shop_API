@@ -20,6 +20,7 @@ namespace DataAccess.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<int>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(20,2)", precision: 20, scale: 2, nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),

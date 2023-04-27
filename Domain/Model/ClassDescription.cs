@@ -21,8 +21,6 @@ using System.Threading.Tasks;
 namespace Domain.Model
 {
 
-    #region POCO classes
-
     // ****************************************************************************************************
     // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
     // ****************************************************************************************************
@@ -52,6 +50,7 @@ namespace Domain.Model
     public class Good
     {
         public int Id { get; set; } // ID (Primary key)
+        public string Category { get; set; } //Category
         public string Title { get; set; } // Title (length: 100)
         public decimal Price { get; set; } // Price
         public int Amount { get; set; } // Amount
@@ -220,9 +219,6 @@ namespace Domain.Model
             Ships = new List<Ship>();
         }
     }
-
-
-    #endregion
 
 }
 // </auto-generated>

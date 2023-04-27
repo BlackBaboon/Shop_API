@@ -38,6 +38,7 @@ namespace Domain.Model
     public class CreateGood
     {
         public int Id { get; set; } // ID (Primary key)
+        public string Category { get; set; } // Title (length: 100)
         public string Title { get; set; } // Title (length: 100)
         public decimal Price { get; set; } // Price
         public int Amount { get; set; } // Amount
@@ -110,6 +111,7 @@ namespace Domain.Model
     public class GetGood
     {
         public int Id { get; set; } // ID (Primary key)
+        public string Category { get; set; } // Title (length: 100)
         public string Title { get; set; } // Title (length: 100)
         public decimal Price { get; set; } // Price
         public int Amount { get; set; } // Amount
