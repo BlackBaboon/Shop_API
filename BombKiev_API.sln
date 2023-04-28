@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Tests", "BusinessLogic.Tests\BusinessLogic.Tests.csproj", "{8677F784-6215-4A73-BA91-E0866E732141}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2B1337A4-E03D-4C8F-B93D-B6E4CAA57B1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A7DD641A-3E17-44B3-AE0B-89F370A377DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +44,20 @@ Global
 		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B056B16-16F3-4F0F-A20D-A6805A28C191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8677F784-6215-4A73-BA91-E0866E732141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8677F784-6215-4A73-BA91-E0866E732141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8677F784-6215-4A73-BA91-E0866E732141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8677F784-6215-4A73-BA91-E0866E732141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FA5D7305-C063-4E46-BCCE-09EB90B21B0D} = {2B1337A4-E03D-4C8F-B93D-B6E4CAA57B1B}
+		{5A3CF0E2-FC2A-4C07-8BD0-D09055C8BCA5} = {2B1337A4-E03D-4C8F-B93D-B6E4CAA57B1B}
+		{91B8C0F1-D1AF-46C2-9B40-4800C87A19BD} = {2B1337A4-E03D-4C8F-B93D-B6E4CAA57B1B}
+		{1B056B16-16F3-4F0F-A20D-A6805A28C191} = {2B1337A4-E03D-4C8F-B93D-B6E4CAA57B1B}
+		{8677F784-6215-4A73-BA91-E0866E732141} = {A7DD641A-3E17-44B3-AE0B-89F370A377DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5872478A-4078-442E-955A-7A339695E8F0}

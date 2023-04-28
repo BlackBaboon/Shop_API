@@ -29,11 +29,68 @@ namespace BusinessLogic.Services
         }
         public async Task Create(User model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }    
+            if(string.IsNullOrEmpty(model.Nickname))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Surname))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Name))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Password))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Phonenumber))
+            {
+                throw new ArgumentException();
+            }
+
             await _repositoryWrapper.User.Create(model);
             await _repositoryWrapper.Save();
         }
         public async Task Update(User model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (string.IsNullOrEmpty(model.Nickname))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Surname))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Name))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Password))
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Phonenumber))
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.User.Update(model);
             await _repositoryWrapper.Save();
         }
