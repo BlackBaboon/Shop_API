@@ -33,7 +33,7 @@ namespace DataAccess.Migrations
                         .HasColumnName("GoodId");
 
                     b.Property<int?>("Comment_")
-                        .HasColumnType("int")
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("Comment");
 
                     b.Property<int>("Rate")

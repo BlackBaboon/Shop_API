@@ -44,11 +44,19 @@ namespace BusinessLogic.Services
         }
         public async Task Create(LikedList model)
         {
+            if(model== null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
             await _repositoryWrapper.LikedList.Create(model);
             await _repositoryWrapper.Save();
         }
         public async Task Update(LikedList model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException();
+            }
             await _repositoryWrapper.LikedList.Update(model);
             await _repositoryWrapper.Save();
         }

@@ -45,11 +45,35 @@ namespace BusinessLogic.Services
         }
         public async Task Create(Comment model)
         {
+            if(model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if(String.IsNullOrEmpty(model.Comment_))
+            {
+                throw new ArgumentException();
+            }
+            if (model.Rate < 0 || model.Rate > 5)
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.Comment.Create(model);
             await _repositoryWrapper.Save();
         }
         public async Task Update(Comment model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (String.IsNullOrEmpty(model.Comment_))
+            {
+                throw new ArgumentException();
+            }
+            if (model.Rate < 0 || model.Rate > 5)
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.Comment.Update(model);
             await _repositoryWrapper.Save();
         }

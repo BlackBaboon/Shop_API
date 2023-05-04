@@ -28,11 +28,51 @@ namespace BusinessLogic.Services
         }
         public async Task Create(Ship model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (model.Amount<=0)
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Status))
+            {
+                throw new ArgumentException();
+            }
+            if (model.ShipDate > DateTime.Now)
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Status))
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.Ship.Create(model);
             await _repositoryWrapper.Save();
         }
         public async Task Update(Ship model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (model.Amount <= 0)
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Status))
+            {
+                throw new ArgumentException();
+            }
+            if (model.ShipDate > DateTime.Now)
+            {
+                throw new ArgumentException();
+            }
+            if (string.IsNullOrEmpty(model.Status))
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.Ship.Update(model);
             await _repositoryWrapper.Save();
         }

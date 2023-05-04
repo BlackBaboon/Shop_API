@@ -172,7 +172,7 @@ namespace DataAccess.Model
             builder.Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.GoodId).HasColumnName(@"GoodId").HasColumnType("int").IsRequired().ValueGeneratedNever();
             builder.Property(x => x.Rate).HasColumnName(@"Rate").HasColumnType("int").IsRequired();
-            builder.Property(x => x.Comment_).HasColumnName(@"Comment").HasColumnType("int").IsRequired(false);
+            builder.Property(x => x.Comment_).HasColumnName(@"Comment").HasColumnType("nvarchar(500)").IsRequired(false);
 
             // Foreign keys
             builder.HasOne(a => a.Good).WithMany(b => b.Comments).HasForeignKey(c => c.GoodId).OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__Comments__GoodId__46E78A0C");

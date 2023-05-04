@@ -44,11 +44,27 @@ namespace BusinessLogic.Services
         }
         public async Task Create(GoodsList model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if(model.Amount <= 0)
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.GoodsList.Create(model);
             await _repositoryWrapper.Save();
         }
         public async Task Update(GoodsList model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (model.Amount <= 0)
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.GoodsList.Update(model);
             await _repositoryWrapper.Save();
         }

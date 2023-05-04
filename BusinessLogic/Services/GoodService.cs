@@ -30,11 +30,59 @@ namespace BusinessLogic.Services
         }
         public async Task Create(Good model)
         {
+            if(model== null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if(String.IsNullOrEmpty(model.Category))
+            {
+                throw new ArgumentException();
+            }
+            if (String.IsNullOrEmpty(model.Title))
+            {
+                throw new ArgumentException();
+            }
+            if (model.Price <= 0)
+            {
+                throw new ArgumentException();
+            }
+            if (model.Amount <= 0)
+            {
+                throw new ArgumentException();
+            }
+            if (String.IsNullOrEmpty(model.Descryption))
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.Good.Create(model);
             await _repositoryWrapper.Save();
         }
         public async Task Update(Good model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (String.IsNullOrEmpty(model.Category))
+            {
+                throw new ArgumentException();
+            }
+            if (String.IsNullOrEmpty(model.Title))
+            {
+                throw new ArgumentException();
+            }
+            if (model.Price <= 0)
+            {
+                throw new ArgumentException();
+            }
+            if (model.Amount <= 0)
+            {
+                throw new ArgumentException();
+            }
+            if (String.IsNullOrEmpty(model.Descryption))
+            {
+                throw new ArgumentException();
+            }
             await _repositoryWrapper.Good.Update(model);
             await _repositoryWrapper.Save();
         }

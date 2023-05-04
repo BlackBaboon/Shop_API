@@ -31,7 +31,7 @@ namespace Domain.Model
         public int UserId { get; set; } // UserId (Primary key)
         public int GoodId { get; set; } // GoodId (Primary key)
         public int Rate { get; set; } // Rate
-        public int? Comment_ { get; set; } // Comment
+        public string Comment_ { get; set; } // Comment
     }
 
     // Goods
@@ -104,7 +104,7 @@ namespace Domain.Model
         public int UserId { get; set; } // UserId (Primary key)
         public int GoodId { get; set; } // GoodId (Primary key)
         public int Rate { get; set; } // Rate
-        public int? Comment_ { get; set; } // Comment
+        public string Comment_ { get; set; } // Comment
     }
 
     // Goods

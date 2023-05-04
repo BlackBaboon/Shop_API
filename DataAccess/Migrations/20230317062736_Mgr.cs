@@ -62,7 +62,7 @@ namespace DataAccess.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     GoodId = table.Column<int>(type: "int", nullable: false),
                     Rate = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<int>(type: "int", nullable: true)
+                    Comment = table.Column<int>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
