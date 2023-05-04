@@ -4,5 +4,6 @@ jobs:
   tests:
     name: Unit Testing
     runs-on: windows-latest
-    steps:
+    steps:      
+      - uses: actions/checkout@v2.1.0
       - run: dotnet test
