@@ -37,12 +37,12 @@ namespace BombKiev_API.Controllers
         {
             var good_temp = await _goodInterface.GetById(id);
             var good = good_temp.Adapt<GetGood>();
-            return Ok(good);
+            return Ok(good);  
         }
 
         /// <summary>
         /// Добавление товара
-        /// </summary>
+        /// </summary> 
         /// <remarks>
         /// 
         /// Пример запроса:
