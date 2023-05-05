@@ -52,10 +52,6 @@ namespace CalibrOnKiev_Bot
 
             Console.WriteLine($"Возьми трубку, '{chatId}' на связи. {messageText}");
 
-            if (message.Text == "Иншала")
-            {
-                await botClient.SendTextMessageAsync(chatId: chatId, text: "Молчать, чурка", cancellationToken: cancellationToken);
-            }
             if (message.Text == "Привет")
             {
                 await botClient.SendTextMessageAsync(chatId: chatId, text: $"Здарова {message.Chat.FirstName}", cancellationToken: cancellationToken);
