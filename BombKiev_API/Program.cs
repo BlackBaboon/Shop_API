@@ -14,8 +14,11 @@ namespace BombKiev_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            string home_connectionstring = "Data Source=Daun;Initial Catalog=ЛарионовДота;Integrated Security=True;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true";
+            string lab116p_connectionstring = "Data Source=lab116-p;Initial Catalog=ЛарионовДота;User=sa;Password=12345;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true";
+
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(
-                "Data Source=Daun;Initial Catalog=ЛарионовДота;Integrated Security=True;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true"));
+                lab116p_connectionstring));
 
             builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
