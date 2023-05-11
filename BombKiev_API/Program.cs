@@ -18,7 +18,7 @@ namespace BombKiev_API
             string lab116p_connectionstring = "Data Source=lab116-p;Initial Catalog=ЛарионовДота;User=sa;Password=12345;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true";
 
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(
-                lab116p_connectionstring));
+                home_connectionstring));
 
             builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
