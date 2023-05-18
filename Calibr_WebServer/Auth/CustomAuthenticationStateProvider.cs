@@ -20,6 +20,7 @@ namespace Calibr_WebServer.Auth
         {
             try
             {
+                //этот колхоз просто великолепен
                 var userSessionStorageResult = await _localStorage.GetAsync<UserSession>("LocalUserSession");
                 var userSession = userSessionStorageResult.Success ? userSessionStorageResult.Value : null;
 
@@ -35,7 +36,6 @@ namespace Calibr_WebServer.Auth
                 }, "CustomAuth"));
 
                 return await Task.FromResult(new AuthenticationState(claimsPrincipal));
-
             }
             catch
             {
