@@ -1,0 +1,27 @@
+﻿@page "/users-list"
+@attribute [Authorize(Roles = "Administrator")]
+@inject IUserService UserService
+
+<h1>Список пользователей</h1>
+@foreach(var user in users)
+{
+    <AuthorizeView Roles="Administrator">
+        <Authorized>
+            <h3>ID: @user.Id</h3>
+            <h5>Никнейм на сайте: @user.Nickname</h5>
+            <h5>Фамилия: @user.Surname</h5>
+            <h5>Имя: @user.Name</h5>
+            <h5>Почта: @user.Email</h5>
+            <h5>Номер телефона: @user.Phonenumber</h5>
+            <hr />
+        </Authorized>
+    </AuthorizeView>
+}
+@code {
+    private List<User> users = new List<User>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await UserService.GetAll();
+    }
+}

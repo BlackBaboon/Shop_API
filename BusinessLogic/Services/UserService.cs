@@ -16,6 +16,11 @@ namespace BusinessLogic.Services
         {
             _repositoryWrapper = repositoryWrapper;
         }
+        public async Task<User> Login(string email, string password)
+        {
+            var user = await _repositoryWrapper.User.GetByEmailAndPassword(email, password);
+            return user;
+        }
         public async Task<List<User>> GetAll()
         {
             return await _repositoryWrapper.User.FindAll();

@@ -6,6 +6,9 @@ using DataAccess.Model;
 using BusinessLogic.Services;
 using DataAccess.Wrapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Authorization;
+using Calibr_WebServer.Auth;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 namespace Calibr_WebServer
 {
@@ -16,9 +19,14 @@ namespace Calibr_WebServer
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddAuthenticationCore();
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
+
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            builder.Services.AddScoped<ProtectedSessionStorage>();
+            builder.Services.AddScoped<ProtectedLocalStorage>();
 
             string home_connectionstring = "Data Source=Daun;Initial Catalog=ЛарионовДота;Integrated Security=True;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true";
             string lab116p_connectionstring = "Data Source=lab116-p;Initial Catalog=ЛарионовДота;User=sa;Password=12345;MultipleActiveResultSets=True;Encrypt=false;TrustServerCertificate=true";

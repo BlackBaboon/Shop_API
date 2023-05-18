@@ -32,7 +32,7 @@ namespace DataAccess.Wrapper
             get
             {
                 if (_user == null)
-                    _user = new UsersRepository(_repoContext);
+                    _user = new UserRepository(_repoContext);
                 return _user;
             }
         }

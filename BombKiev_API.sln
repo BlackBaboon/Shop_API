@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2B1337A4-E03
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A7DD641A-3E17-44B3-AE0B-89F370A377DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calibr_WebServer", "Calibr_WebServer\Calibr_WebServer.csproj", "{C5E945BE-EF64-4AC9-95E5-CB35AA665E82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calibr_WebServer", "Calibr_WebServer\Calibr_WebServer.csproj", "{C5E945BE-EF64-4AC9-95E5-CB35AA665E82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
