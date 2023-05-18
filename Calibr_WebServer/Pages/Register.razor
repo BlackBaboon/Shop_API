@@ -61,8 +61,15 @@
         {
             user.Id = new Random().Next(int.MaxValue);
 
-            await UserService.Create(user);
-            navManager.NavigateTo("/", true);
+            try
+            {
+                await UserService.Create(user);
+                navManager.NavigateTo("/", true);
+            }
+            catch
+            {
+                await js.InvokeVoidAsync("alert", "Данные заполни по-лучше");
+            }
         }
 
     }
