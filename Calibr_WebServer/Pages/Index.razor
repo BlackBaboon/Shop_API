@@ -7,19 +7,43 @@
 
 <AuthorizeView>
     <Authorized>
-        <h1>ZdaroVa, @context.User.Identity.Name!</h1>
+        <div>
+            <style>
+                div {
+                    text-align: center;
+                } </style>
+            <h1>Добро пожаловать в 1050ti-store, @context.User.Identity.Name!</h1>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <h1>Dillon!, you son of a bitch</h1>
+        <div>
+            <style>
+                div {
+                    text-align: center;
+                }
+            </style>
+            <h1>Добро пожаловать в 1050ti-store</h1>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
 
-<AuthorizeView>
-    <Authorized>
-        <br /><br />
-        <button class="btn btn-outline-primary" @onclick="DisplayGreetingAlert">Greeting</button>
-    </Authorized>
-</AuthorizeView>
+<MudText Style="font-size:x-large; font-family:sans-serif; text-align: center">У нас есть огромный ассортимент самых лучших видеокарт</MudText>
+
+<MudGrid Style="align-content: center" Spacing="10">
+    <MudItem>
+        <MudText Style="font-size:x-large; font-family:sans-serif; text-align: center">Невероятная система охлаждения</MudText>
+        <MudImage Style="width: 500px; max-height:auto" Src="http://rain.linuxoid.in/fileupload/photos/hardware/rig/asus%207850%20+%2092%20mm%20fan_2.jpg" />
+    </MudItem>
+
+    <MudItem>
+        <MudText Style="font-size:x-large; font-family:sans-serif; text-align: center">Новеший чип для любых современных игр</MudText>
+        <MudImage Style="width: 500px; max-height:auto" Src="https://34ra.ru/wp-content/uploads/sgorevshaya-videokarta.jpg" />
+    </MudItem>
+</MudGrid>
+<MudItem>
+    <MudText Style="font-size:x-large; font-family:sans-serif; text-align: center">И наконец, наш флагман, сочетающий в себе все эти новшества - 1050ti msi gamingx на 4гб видеопамяти</MudText>
+    <MudImage Style="width: 700px; max-height:auto" Src="https://i.ebayimg.com/images/g/LcsAAOSwMpNhRtw-/s-l640.jpg" />
+</MudItem>
 
 @code{
     [CascadingParameter]

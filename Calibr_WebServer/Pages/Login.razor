@@ -6,6 +6,7 @@
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 
+
 <div class="row">
     <div class="col-1g-4 offset-1g-4 pt-4 pb-4 border">
 :       <div class="mb-3 text-center">
@@ -25,6 +26,7 @@
     </div>
 </div>
 
+
 @code {
     private class Model
     {
@@ -41,10 +43,11 @@
             await js.InvokeVoidAsync("alert", "Invalid Colyaska");
             return;
         }
+        CurrentUser.Id = userAccount.Id.ToString();
         var userSession = new UserSession{
                 Id = userAccount.Id.ToString(),
                 Email = userAccount.Email,
-                FirstName = userAccount.Name,
+                FirstName = userAccount.Nickname,
                 Role = userAccount.IsAdmin?"Administrator":"User"
             };
         var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;

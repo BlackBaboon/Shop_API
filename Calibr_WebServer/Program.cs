@@ -1,4 +1,4 @@
-using Calibr_WebServer.Data;
+using Calibr_WebServer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Domain.Interfaces;
@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components.Authorization;
 using Calibr_WebServer.Auth;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using MudBlazor.Services;
 
 namespace Calibr_WebServer
 {
@@ -22,7 +23,6 @@ namespace Calibr_WebServer
             builder.Services.AddAuthenticationCore();
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
 
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddScoped<ProtectedSessionStorage>();
@@ -40,6 +40,8 @@ namespace Calibr_WebServer
             builder.Services.AddScoped<IShipService, ShipService>();
             builder.Services.AddScoped<ILikedListService, LikedListService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
+
+            builder.Services.AddMudServices();
 
             var app = builder.Build();
 

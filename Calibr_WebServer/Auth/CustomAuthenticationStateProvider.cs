@@ -23,11 +23,11 @@ namespace Calibr_WebServer.Auth
                 //этот колхоз просто великолепен
                 var userSessionStorageResult = await _localStorage.GetAsync<UserSession>("LocalUserSession");
                 var userSession = userSessionStorageResult.Success ? userSessionStorageResult.Value : null;
-
                 if (userSession == null)
                 {
                     return await Task.FromResult(new AuthenticationState(_anonymous));
                 }
+                CurrentUser.Id = userSessionStorageResult.Value.Id;
                 var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim> {
                 new Claim(ClaimTypes.Sid,userSession.Id),
                 new Claim(ClaimTypes.Name,userSession.FirstName),
@@ -48,6 +48,7 @@ namespace Calibr_WebServer.Auth
                     {
                         return await Task.FromResult(new AuthenticationState(_anonymous));
                     }
+                    CurrentUser.Id = userSessionStorageResult.Value.Id;
                     var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim> {
                     new Claim(ClaimTypes.Sid,userSession.Id),
                     new Claim(ClaimTypes.Name,userSession.FirstName),
