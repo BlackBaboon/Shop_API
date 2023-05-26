@@ -22,24 +22,24 @@ namespace BusinessLogic.Services
         }
         public async Task<Comment> GetByIds(int userid, int goodid)
         {
-            var comment = _repositoryWrapper.Comment
-            .FindByCondition(x => x.UserId == userid && x.GoodId == goodid).Result.First();
+            var comment = await _repositoryWrapper.Comment
+            .FindByCondition(x => x.UserId == userid && x.GoodId == goodid);
 
-            return comment;
+            return comment.First();
         }
 
         public async Task<List<Comment>> GetByUserid(int userid)
         {
-            var comment = _repositoryWrapper.Comment
-            .FindByCondition(x => x.UserId == userid).Result;
+            var comment = await _repositoryWrapper.Comment
+            .FindByCondition(x => x.UserId == userid);
 
             return comment;
         }
 
         public async Task<List<Comment>> GetByGoodid(int goodid)
         {
-            var comment = _repositoryWrapper.Comment
-            .FindByCondition(x => x.GoodId == goodid).Result;
+            var comment = await _repositoryWrapper.Comment
+            .FindByCondition(x => x.GoodId == goodid);
 
             return comment;
         }

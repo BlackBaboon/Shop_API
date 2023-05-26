@@ -79,6 +79,7 @@ csharp_using_directive_placement = outside_namespace:silent
 csharp_style_allow_embedded_statements_on_same_line_experimental = true:silent
 csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true:silent
 csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:silent
+csharp_indent_labels = one_less_than_current
 
 [*.vb]
 #### Стили именования ####

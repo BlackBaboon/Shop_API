@@ -1,0 +1,131 @@
+﻿@page "/goods/{Id:int}"
+@inject IGoodService GoodService
+@inject ICommentService CommentService
+@inject IUserService UserService
+@inject NavigationManager navManager
+
+<MudContainer Class="mb-12">
+    <MudGrid>
+        <MudItem sm="12">
+            <MudPaper Class="pa-4" Elevation="25">
+                <MudTabs Elevation="0" Centered="true" Rounded="true" PanelClass="pa-6" DisableRipple="true">
+                    <MudTabPanel Text="Основные сведения" ToolTip="Первый">
+                        <MudImage Style="width: 300px; height: auto;" Src="@Link"></MudImage>
+                        <MudText Style="font-size: 60px; font-weight: bold" Align="Align.Left">@good.Title</MudText>
+                        <MudText Style="font-size: 40px;" Align="Align.Left">@good.Category</MudText>
+                        @foreach (string r in Description)
+                        {
+                            <MudItem>
+                                <MudText Style="font-size: 20px">
+                                    @WriteDesc(r)
+                                </MudText>
+                            </MudItem>
+                        }
+                    </MudTabPanel>
+                    <MudTabPanel Text="Отзывы" ToolTip="Второй">
+                        <MudImage Style="width: 300px; height: auto;" Src="@Link"></MudImage>
+                            @if (comments.Count > 0)
+                            {
+                                @foreach (var r in comments)
+                                {
+                                    <MudItem>                  
+                                        <MudText Style="font-size: 25px; font-weight: bold" Align="Align.Left">
+                                            @WriteUserInReview(r)
+                                        </MudText>
+                                        <MudText Style="font-size: 20px" Align="Align.Left">
+                                            @WriteReview(r)
+                                        </MudText>
+                                        <MudText Style="font-size: 20px" Align="Align.Left">
+                                         
+                                        </MudText>
+                                    </MudItem>
+
+                                }
+                            }
+                            else
+                            {
+                                <MudItem>
+                                    <MudText Style="font-size: 20px">
+                                        Пока нет отзывов
+                                    </MudText>
+                                </MudItem>
+                            }
+                    </MudTabPanel>
+                </MudTabs>
+            </MudPaper>
+        </MudItem>
+                                                            
+    </MudGrid>
+                                                        
+</MudContainer>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    public class CommentToWrite
+    {
+        public string username{ get; set; }
+        public double rate { get; set; }
+        public string review{ get; set; }
+    }
+
+    private string Link;
+    private Good good = new Good();
+    private List
+    <CommentToWrite> comments = new List<CommentToWrite>();
+    private List<string> Description = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Link = RandomImage();
+        try
+        {
+            good = await GoodService.GetById(Id);
+            Description = good.Descryption.Split(';').ToList();
+        }
+        catch 
+        {
+            navManager.NavigateTo("/", true);
+        }
+        try
+        {
+            var comments = await CommentService.GetByGoodid(Id);
+            foreach(var r in comments)
+            {
+                CommentToWrite comm = new CommentToWrite { 
+                    username = (await UserService.GetById(r.UserId)).Nickname,
+                    rate = r.Rate,
+                    review = r.Comment_
+                };
+                this.comments.Add(comm);
+            }
+        }
+        catch
+        {
+            comments = new List<CommentToWrite>();
+        }
+    }
+    protected string RandomImage()
+    {
+        var links = new List<string>() { "https://avatars.mds.yandex.net/get-mpic/4944925/img_id5040519277052105291.jpeg/orig"
+        , "https://static.onlinetrade.ru/img/items/m/msi_geforce_gtx_1050_ti_1379mhz_pci_e_3.0_4096mb_7008mhz_128_bit_dvi_hdmi_hdcp_gtx_1050_ti_gaming_x_4g__1.jpg"
+        , "https://www.express-office.ru/1215505-safe_gor/videokarta-asus-pci-e-cerberus-gtx1050ti-a4g-nvidia-geforce-gtx-1050ti-4096mb-128-gddr5-1303-7008-dvix1-hdmix1-dpx1-hdcp-ret.jpg"
+        , "https://pc-arena.ru/upload/iblock/gg2/gg2fs2la1srdeqtfj45zoqso1k4p8twz.jpg"
+        , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2uDcQg7hNr7T6f2jCd9RbJWvCoT4CO4NxkQ&usqp=CAU"};
+        return links[new Random().Next(0, links.Count)];
+    }
+    protected string WriteDesc(string r)
+    {
+        return "   " + r.Replace(";", "");
+    }
+    protected string WriteUserInReview(CommentToWrite r)
+    {
+        return $"Пользователь {r.username} ({r.rate}/5) пишет:";
+    }
+    protected string WriteReview(CommentToWrite r)
+    {
+        return $"{r.review}\n\n";
+    }
+}
